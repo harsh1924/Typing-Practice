@@ -32,8 +32,8 @@
         return fetch('http://api.quotable.io/random').then(res => res.json()).then(data => data.content);
     }
 
-    function renderNextQuote() {
-        const quote = getRandomQuote();
+    async function renderNextQuote() {
+        const quote = await getRandomQuote();
         quoteDisplayElement.innerHTML = '';
         quote.split('').forEach(element => {
             const characterSpan = document.createElement('span');

@@ -28,6 +28,8 @@
     const quoteInputElement = document.getElementById('quoteInput');
     const timerElement = document.getElementById('timer');
 
+    renderNextQuote();
+
     quoteInputElement.addEventListener('input', () => {
         const arrayQuote = quoteDisplayElement.querySelectorAll('span');
         const arrayValue = quoteInputElement.value.split('');
@@ -80,7 +82,7 @@
         return Math.floor((new Date() - startTime) / 1000);
     }
 
-    renderNextQuote();
+    
 </script>
 
 </html>

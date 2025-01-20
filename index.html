@@ -28,6 +28,21 @@
     const quoteInputElement = document.getElementById('quoteInput');
     const timerElement = document.getElementById('timer');
 
+    function getRandomQuote() {
+        return fetch('http://api.quotable.io/random').then(res => res.json()).then(data => data.content);
+    }
+
+    function renderNextQuote() {
+        const quote = getRandomQuote();
+        quoteDisplayElement.innerHTML = '';
+        quote.split('').forEach(element => {
+            const characterSpan = document.createElement('span');
+            characterSpan.innerText = element;
+            quoteDisplayElement.appendChild(characterSpan);
+        });
+        quoteInputElement.value = null;
+        startTimer();
+    }
     renderNextQuote();
 
     quoteInputElement.addEventListener('input', () => {
@@ -53,21 +68,7 @@
         if (correct) renderNextQuote();
     })
 
-    async function getRandomQuote() {
-        return await fetch('http://api.quotable.io/random').then(res => res.json()).then(data => data.content);
-    }
 
-    async function renderNextQuote() {
-        const quote = await getRandomQuote();
-        quoteDisplayElement.innerHTML = '';
-        quote.split('').forEach(element => {
-            const characterSpan = document.createElement('span');
-            characterSpan.innerText = element;
-            quoteDisplayElement.appendChild(characterSpan);
-        });
-        quoteInputElement.value = null;
-        startTimer();
-    }
 
     let startTime;
     function startTimer() {
@@ -82,7 +83,7 @@
         return Math.floor((new Date() - startTime) / 1000);
     }
 
-    
+
 </script>
 
 </html>
